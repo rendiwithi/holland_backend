@@ -1,0 +1,14 @@
+const userController = require("./userController");
+const menuController = require("./menuController");
+const detailMenuController = require("./detailMenuController");
+const detailTopingController = require("./detailToppingController");
+const detailPesananController = require("./detailPesananController");
+const bannerController = require("./bannerController");
+var controllers = {};
+controllers.user = userController;
+controllers.menu = menuController;
+controllers.detailMenu = detailMenuController;
+controllers.detailToping = detailTopingController;
+controllers.detailPesanan = detailPesananController;
+controllers.banner = bannerController;
+module.exports = controllers;
