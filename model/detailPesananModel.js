@@ -14,6 +14,7 @@ var detailPesanan = db.define(
         topping: { type: sequelize.INTEGER },
         status: { type: sequelize.INTEGER },
         keterangan: { type: sequelize.STRING },
+        harga: { type: sequelize.INTEGER },
     },
     {
         // freeze name table not using *s on name
@@ -22,8 +23,10 @@ var detailPesanan = db.define(
         timestamps: false,
     }
 );
+
 detailPesanan.belongsTo(statusM, { foreignKey: 'status' });
 detailPesanan.belongsTo(detailMenu, { foreignKey: 'id_detail_menu' });
 detailPesanan.belongsTo(user, { foreignKey: 'id_user' });
 detailPesanan.belongsTo(toping, { foreignKey: 'topping' });
+
 module.exports = detailPesanan;
