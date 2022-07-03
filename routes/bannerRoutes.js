@@ -7,4 +7,5 @@ router.get("/", controller.banner.getAll);
 router.post("/upload", image.single("image"), controller.banner.newBanner);
 router.put("/edit", image.single("image"), controller.banner.editBanner);
 router.delete("/delete/:id", controller.banner.deleteBanner);
+
 module.exports = router;

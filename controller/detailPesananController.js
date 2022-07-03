@@ -93,4 +93,17 @@ controller.editDisc = async function (req, res) {
         res.status(404).json({ status: false, message: error });
     }
 };
+controller.deletePesanan = async function (req, res) {
+    try {
+        await model.detailPesanan
+            .destroy({ where: { id: req.body.id } }).then((result) => {
+                res.status(201).json({
+                    status: true,
+                    message: "Pesanan successful delete",
+                });
+            });
+    } catch (error) {
+        res.status(404).json({ status: false, message: error });
+    }
+}
 module.exports = controller;
