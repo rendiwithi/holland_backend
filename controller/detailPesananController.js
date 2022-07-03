@@ -8,7 +8,8 @@ controller.getAll = async function (req, res) {
     try {
         await model.detailPesanan.findAll(
             {
-                include: [model.user, model.detailMenu, model.status, model.toping]
+                include: [model.user, model.detailMenu, model.status, model.toping],
+                where: { status: "4" }
             }
         ).then((result) => {
             if (result.length > 0) {
@@ -32,7 +33,7 @@ controller.createNew = async function (req, res) {
                 topping: req.body.topping,
                 status: 4,
                 keterangan: req.body.keterangan,
-                harga:req.body.harga
+                harga: req.body.harga
             })
             .then((result) => {
                 res.status(201).json({
@@ -53,6 +54,30 @@ controller.editAt = async function (req, res) {
                     await model.detailPesanan.update(
                         {
                             status: req.body.status,
+                        },
+                        { where: { id: req.body.id } }
+                    );
+                    res.status(200).json({
+                        status: true,
+                        message: "update successful",
+                    });
+                } else {
+                    res.status(500).json({ status: false, message: "update failed" });
+                }
+            });
+    } catch (error) {
+        res.status(404).json({ status: false, message: error });
+    }
+};
+controller.editDisc = async function (req, res) {
+    try {
+        await model.detailPesanan
+            .findAll({ where: { id: req.body.id } })
+            .then(async (result) => {
+                if (result.length > 0) {
+                    await model.detailPesanan.update(
+                        {
+                            harga: req.body.harga,
                         },
                         { where: { id: req.body.id } }
                     );

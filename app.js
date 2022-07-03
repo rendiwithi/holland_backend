@@ -8,8 +8,11 @@ const detailMenuRoute = require("./routes/detailMenu");
 const detailTopingRoute = require("./routes/detailToping");
 const detailPesananRoute = require("./routes/detailPesanan");
 const bannerRoute = require("./routes/bannerRoutes");
+const adminJSExpress = require("@adminjs/express");
+const adminJSDB = require("./config/databaseAdmin");
 
 const app = express();
+const routerAdminJS = adminJSExpress.buildRouter(adminJSDB);
 // setting middleware
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,6 +23,7 @@ app.use("/detail_menu", detailMenuRoute);
 app.use("/detail_toping", detailTopingRoute);
 app.use("/pesanan", detailPesananRoute);
 app.use("/banner", bannerRoute);
+app.use(adminJSDB.options.rootPath, routerAdminJS);
 
 // setting error path
 app.use((req, res, next) => {

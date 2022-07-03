@@ -24,5 +24,21 @@ controller.getAll = async function (req, res) {
     }
 };
 
+controller.newDetailMenu = async function (req, res) {
+    try {
+        await model.detailMenu
+            .create({
+                id_toko:1,
+                id_menu: req.body.idMenu,
+            }).then((result) => {
+                res.status(201).json({
+                    status: true,
+                    message: "Detail Menu successful created",
+                });
+            });
+    } catch (error) {
+        res.status(404).json({ status: false, message: error });
+    }
+}
 
 module.exports = controller;
